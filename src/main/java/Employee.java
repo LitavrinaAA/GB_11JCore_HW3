@@ -3,6 +3,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Comparator;
+
 //@Getter
 //@Setter
 @AllArgsConstructor
@@ -22,11 +24,6 @@ public class Employee {
         return Period.between(birthDate, currentDate).getYears();
     }
 
-//    @Override
-//    public String toString() {
-//
-//        return String.format("%s - %s , phone - %s ,salary - %s, age - %s", FIO, position, phone, salary, this.getAge());
-//    }
 
     public void printInfo() {
         System.out.println(this);
@@ -34,6 +31,10 @@ public class Employee {
 
     public void increaseSalary(int value) {
         this.salary = salary.add(BigDecimal.valueOf(value));
+    }
+    //  для сравнения двух дат рождения сотрудников
+    public static Comparator<Employee> birthDateComparator() {
+        return Comparator.comparing(employee -> employee.birthDate);
     }
 
 }

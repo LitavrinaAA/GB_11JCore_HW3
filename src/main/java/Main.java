@@ -29,6 +29,11 @@ public class Main {
                 "+79765463452",
                 BigDecimal.valueOf(50000),
                 LocalDate.of(1990, 1, 1));
+        Employee employee6 = new Manager("Petr Perviy",
+                "manager",
+                "+79999999999",
+                BigDecimal.valueOf(300000),
+                LocalDate.of(1975, 1, 1));
 
         Employee employee5 = new Employee("Petr Petrov",
                 "team lead",
@@ -37,13 +42,20 @@ public class Main {
                 LocalDate.of(1975, 1, 1));
 
 
-        List<Employee> employees = new ArrayList<>(Arrays.asList(employee1, employee2, employee3, employee4, employee5));
+        List<Employee> employees = new ArrayList<>(Arrays.asList(
+                employee1,
+                employee2,
+                employee3,
+                employee4,
+                employee5,
+                employee6));
 
         for (Employee employee : employees) {
             employee.printInfo();
         }
 
-        salaryIncreaseForEmployees(employees, 45, 30000);
+        Manager.salaryIncreaseForEmployees(employees, 45, 30000);
+
         System.out.println();
 
         for (Employee employee : employees) {
@@ -54,13 +66,6 @@ public class Main {
 
     }
 
-    public static void salaryIncreaseForEmployees(List<Employee> employees, int ageOlder, int bonusValue) {
-        for (Employee employee : employees) {
-            if (employee.getAge() > ageOlder) {
-                employee.increaseSalary(bonusValue);
-            }
-        }
-    }
 
     public static String getAverageSalaryAndAge(List<Employee> employees) {
         double averageSalaries = employees.stream().mapToDouble(x -> x.getSalary().doubleValue()).average().orElseThrow();
